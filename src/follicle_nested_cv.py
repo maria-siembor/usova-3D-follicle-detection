@@ -1,14 +1,4 @@
-"""Nested cross-validation for follicle detection parameters.
-
-For each held-out volume: select the best-scoring config using ONLY
-the other 15 volumes, then apply that selected config to the held-out
-volume. This is the honest way to report performance, picking one
-config by looking at all 16 volumes at once (as was done informally
-during development, see follicle_detection.py's docstring) would
-overstate how well it generalizes to a genuinely new volume.
-
-Saves progress after every outer fold, resumable if interrupted.
-"""
+"""Nested cross-validation for follicle detection parameters."""
 
 import os
 import json
