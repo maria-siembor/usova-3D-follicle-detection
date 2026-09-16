@@ -1,9 +1,3 @@
-"""Run the full deployment pipeline on all 19 held-out test volumes:
-segment ovary, detect follicles, measure, classify by IVF retrieval
-suitability. Saves per-volume measurement CSVs, a labeled VTK per
-volume (official USOVA3D submission format), and a summary CSV across
-all patients. Progress saves per volume, resumable."""
-
 import sys
 import os
 import json
