@@ -1,4 +1,4 @@
-# USOVA3D — 3D Ovarian Follicle Detection
+# 3D Ovarian Follicle Detection
 
 Automated detection, measurement, and IVF-retrieval-maturity classification
 of ovarian follicles from 3D transvaginal ultrasound volumes, built on the
