@@ -1,14 +1,3 @@
-"""Export 2D axial slices + consensus ovary masks from all 16 training
-volumes, for training a 2D U-Net (the classical RF pipeline processes
-full 3D volumes directly; this instead treats each slice as an
-independent 2D training image, giving ~3000+ training images from just
-16 volumes, tractable for deep learning where 16 3D volumes alone
-would not be).
-
-Saves one .npz per volume (slices + masks + volume_id), so cross-
-validation splits can group by volume (no leakage) once uploaded to
-Kaggle."""
-
 import sys
 import os
 import numpy as np
