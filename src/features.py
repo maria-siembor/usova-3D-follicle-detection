@@ -1,15 +1,7 @@
 """Multiscale intensity/edge/texture feature extraction for per-voxel
 ovary classification. Features: raw intensity, Gaussian-smoothed
 intensity, gradient magnitude, Laplacian of Gaussian, local variance,
-each at several scales, plus a positional feature (distance from volume
-center), following the standard multiscale RF-segmentation recipe.
-
-The positional feature was added after finding that a purely
-intensity/texture-based classifier had low precision (0.38-0.48 on 2/3
-volumes tested): it cannot distinguish "dark tissue near the ovary's
-typical central location" from "dark tissue elsewhere in the frame"
-(e.g. acoustic shadowing near the frame edge), since none of the
-intensity/texture features encode voxel position."""
+each at several scales, plus a positional feature."""
 
 import numpy as np
 from scipy import ndimage
