@@ -1,5 +1,7 @@
 # 3D Ovarian Follicle Detection
 
+[![Tests](https://github.com/maria-siembor/usova-3D-follicle-detection/actions/workflows/tests.yml/badge.svg)](https://github.com/maria-siembor/usova-3D-follicle-detection/actions/workflows/tests.yml)
+
 Automated detection, measurement, and IVF-retrieval-maturity classification
 of ovarian follicles from 3D transvaginal ultrasound volumes, built on the
 USOVA3D research dataset.
@@ -120,6 +122,16 @@ Upload a legacy `.vtk` volume; the app runs the full pipeline and displays
 a per-slice canvas view with color-coded follicle status alongside a
 measurements table.
 
+## Running the tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+```
+
+See [`TESTING.md`](TESTING.md) for what's covered. The same suite runs in
+CI on every push and pull request (`.github/workflows/tests.yml`).
+
 ## Known gaps / next steps
 
 - The official USOVA3D composite scoring metric (which adds volume-ratio
@@ -131,8 +143,11 @@ measurements table.
 - The web app does not yet expose a Random-Forest-vs-U-Net toggle, despite
   this being the planned design once the follicle U-Net is trained
   (`RESULTS_LOG.md`).
-- No automated test suite; correctness is currently checked only via
-  cross-validation metrics against expert ground truth.
+- Automated tests (`tests/`, run via `pytest`, see `TESTING.md`) cover the
+  VTK I/O, follicle detection, and measurement/classification logic, plus
+  the Flask app's routes — but not the RF/CV training code itself,
+  which is still checked only via the cross-validation metrics against
+  expert ground truth.
 - Dependency versions in `requirements.txt` are unpinned minimums, not the
   exact versions used during development (not recorded).
 

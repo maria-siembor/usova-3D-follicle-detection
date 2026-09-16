@@ -5,10 +5,13 @@ web application without requiring the large dataset or trained model.
 
 Run it from the project root:
 
-```powershell
-.\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
-.\venv\Scripts\python.exe -m pytest -q
+```bash
+pip install -r requirements-dev.txt
+pytest -q
 ```
+
+(On Windows: `.\venv\Scripts\python.exe -m pip install -r requirements-dev.txt`
+and `.\venv\Scripts\python.exe -m pytest -q`.)
 
 The tests cover:
 
