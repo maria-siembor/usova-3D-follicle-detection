@@ -1,7 +1,5 @@
 """Run the full nested cross-validation for follicle detection.
-Expect real runtime here, roughly 2000 config-evaluations total across
-all folds. Progress saves after every outer fold (data/follicle_nested_cv_results.json),
-safe to interrupt (Ctrl+C) and rerun, it resumes automatically."""
+Expect real runtime here."""
 
 import sys
 sys.path.append('src')
