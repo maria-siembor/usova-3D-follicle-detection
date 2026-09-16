@@ -1,6 +1,5 @@
 """Leave-one-volume-out cross-validation for the ovary segmentation
-Random Forest classifier. Saves progress after every fold, so a long
-run isn't lost to an interruption."""
+Random Forest classifier."""
 
 import os
 import json
