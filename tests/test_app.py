@@ -10,6 +10,8 @@ def test_homepage_and_validation_errors():
     client = app.app.test_client()
 
     assert client.get("/").status_code == 200
+    models = client.get("/api/models").get_json()
+    assert set(models) == {"classical", "deep_learning"}
     assert client.post("/api/analyse").status_code == 400
     response = client.post(
         "/api/analyse",

@@ -11,6 +11,20 @@ let analysis = null;
 let selectedId = null;
 let currentSlice = null;
 
+fetch('/api/models')
+  .then(response => response.json())
+  .then(models => {
+    const option = document.querySelector('#deep-learning-option');
+    const status = document.querySelector('#deep-learning-status');
+    if (models.deep_learning.available) {
+      option.disabled = false;
+      status.textContent = 'Kaggle U-Net ready';
+    } else {
+      status.textContent = 'install Torch and add checkpoint';
+    }
+  })
+  .catch(() => { document.querySelector('#deep-learning-status').textContent = 'unavailable'; });
+
 fileInput.addEventListener('change', () => {
   fileLabel.textContent = fileInput.files[0]?.name || 'Choose a VTK volume';
 });
@@ -63,6 +77,7 @@ function renderAnalysis(payload) {
     Math.max(0, ...measurements.map(item => item.volume_mm3))
   );
   document.querySelector('#volume-meta').textContent = `${payload.shape.join(' x ')} voxels - ${payload.spacing.map(value => value.toFixed(2)).join(' x ')} mm spacing`;
+  document.querySelector('#volume-meta').textContent += ` · ${payload.model === 'deep_learning' ? '2D U-Net' : 'Classical RF'}`;
   document.querySelector('#table-count').textContent = `${measurements.length} structures`;
   slider.max = payload.shape[0] - 1;
   slider.value = payload.first_slice.index;

@@ -26,6 +26,11 @@
         <p class="muted">The current pipeline accepts a legacy binary <strong>.vtk</strong> volume.</p>
       </div>
       <form id="upload-form">
+        <div class="model-choice">
+          <span class="choice-label">Detection engine</span>
+          <label><input type="radio" name="model" value="classical" checked> Classical RF <small>fast baseline</small></label>
+          <label><input id="deep-learning-option" type="radio" name="model" value="deep_learning" disabled> 2D U-Net <small id="deep-learning-status">checking availability...</small></label>
+        </div>
         <label class="dropzone" id="dropzone" for="volume-file">
           <span class="upload-mark">↑</span>
           <span><strong id="file-label">Choose a VTK volume</strong><small>or drop it here</small></span>

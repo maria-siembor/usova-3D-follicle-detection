@@ -13,11 +13,14 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from pipeline import run_pipeline  # noqa: E402
 from vtk_io import read_vtk  # noqa: E402
+from pipeline import measure_follicles, summarize_patient  # noqa: E402
+from unet_inference import predict_labels  # noqa: E402
 
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 256 * 1024 * 1024
 MODEL_PATH = ROOT / "data" / "final_ovary_model.joblib"
+UNET_MODEL_PATH = ROOT / "kaggle_outputs" / "follicle_unet" / "follicle_unet.pt"
 RESULTS = {}
 
 
@@ -45,9 +48,26 @@ def slice_payload(volume, labels, index):
     }
 
 
+def available_models():
+    try:
+        import torch  # noqa: F401
+        deep_learning_available = UNET_MODEL_PATH.exists()
+    except ImportError:
+        deep_learning_available = False
+    return {
+        "classical": {"available": MODEL_PATH.exists(), "label": "Classical RF"},
+        "deep_learning": {"available": deep_learning_available, "label": "2D U-Net"},
+    }
+
+
 @app.get("/")
 def index():
     return render_template("index.html")
+
+
+@app.get("/api/models")
+def models():
+    return jsonify(available_models())
 
 
 @app.post("/api/analyse")
@@ -57,10 +77,22 @@ def analyse():
         return jsonify({"error": "Choose a VTK volume before analysing."}), 400
     if not uploaded.filename.lower().endswith(".vtk"):
         return jsonify({"error": "The current reader expects a legacy .vtk volume."}), 400
+    model_choice = request.form.get("model", "classical")
+    if model_choice not in {"classical", "deep_learning"}:
+        return jsonify({"error": "Unknown model choice."}), 400
 
     try:
         volume, spacing, _ = read_vtk(uploaded.read())
-        result = run_pipeline(volume, spacing, get_model())
+        if model_choice == "deep_learning":
+            follicle_labels = predict_labels(volume, spacing, UNET_MODEL_PATH)
+            measurements = measure_follicles(follicle_labels, np.prod(spacing))
+            result = {
+                "follicle_labels": follicle_labels,
+                "measurements": measurements,
+                "summary": summarize_patient(measurements),
+            }
+        else:
+            result = run_pipeline(volume, spacing, get_model())
     except Exception as error:
         app.logger.exception("Pipeline failed")
         return jsonify({"error": f"Analysis failed: {error}"}), 422
@@ -73,6 +105,7 @@ def analyse():
         "shape": list(volume.shape),
         "spacing": list(spacing),
         "summary": result["summary"],
+        "model": model_choice,
         "measurements": measurements,
         "first_slice": slice_payload(volume, result["follicle_labels"], volume.shape[0] // 2),
     })

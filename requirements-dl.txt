@@ -1,0 +1,3 @@
+# Optional local runtime for the Kaggle-trained 2D U-Net.
+# The classical RF engine does not require this file.
+torch>=2.0
