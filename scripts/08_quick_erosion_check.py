@@ -1,10 +1,3 @@
-"""Quick, INFORMAL check of whether eroding the predicted ovary mask
-before follicle detection improves precision. Uses the final model
-(trained on all 16 volumes), so this is NOT a rigorous test, the model
-has seen this exact data. Purpose: check the direction/magnitude of
-the effect cheaply before committing to a full, honest re-validation
-(retraining per fold) if it looks promising."""
-
 import sys
 import joblib
 import numpy as np
