@@ -1,7 +1,5 @@
 """Run the full leave-one-volume-out cross-validation for ovary
-segmentation, using the real (not reduced) settings. Saves progress
-after every fold to data/ovary_cv_results.json, safe to interrupt and
-resume."""
+segmentation."""
 
 import sys
 import time
