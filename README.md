@@ -17,10 +17,8 @@ view the results slice-by-slice with a measurements table.
 
 > **Status:** research/coursework project, single contributor. Ovary
 > segmentation and follicle detection are validated with cross-validation
-> (see `RESULTS_LOG.md`); the web app currently wires up the classical
-> Random Forest path only. A 2D U-Net alternative for follicle segmentation
-> is being developed on Kaggle (`follicle_segmentation_Unet.ipynb`) for
-> integration as a second option in the app.
+> (see `RESULTS_LOG.md`). The web app supports both the classical Random
+> Forest path and the optional Kaggle-trained 2D U-Net path.
 
 ## How it works
 
@@ -30,7 +28,7 @@ view the results slice-by-slice with a measurements table.
 | Follicle detection | Gaussian smoothing → intensity threshold (within ovary ROI) → morphological opening → connected components → min-size filter | `src/follicle_detection.py` |
 | Ground-truth matching | Python port of the official USOVA3D `czEvaluate.m` / `AgreedBothExperts.m` greedy matching algorithm | `src/follicle_matching.py` |
 | Measurement & classification | Voxel count → physical volume (via spacing) → equivalent sphere diameter → maturity class | `src/pipeline.py` |
-| Alternative segmentation (experimental) | 2D U-Net (PyTorch), trained per-slice, re-stacked to 3D | `follicle_segmentation_Unet.ipynb` (Kaggle) |
+| Alternative segmentation (experimental) | 2D U-Net (PyTorch), trained per-slice, re-stacked to 3D | `follicle_segmentation_Unet.ipynb`, `src/unet_inference.py` |
 
 Volumes are stored as legacy VTK `STRUCTURED_POINTS` files; `src/vtk_io.py`
 is a small dependency-free reader/writer for that format (no VTK/ITK
@@ -58,6 +56,7 @@ src/                             Core library
 scripts/                         Numbered, sequential CLI steps (01-09)
 static/, templates/              Web app frontend (vanilla JS/CSS, Jinja2)
 follicle_segmentation_Unet.ipynb Kaggle notebook: 2D U-Net for follicle segmentation
+requirements-dl.txt             Optional PyTorch runtime for local U-Net inference
 RESULTS_LOG.md                   Experiment log (methods + validated results)
 REFERENCES.md                    Dataset, baseline paper, and clinical citations
 ```
@@ -75,7 +74,15 @@ pip install -r requirements.txt
 
 `requirements-web.txt` (Flask only) is a minimal subset if you just want to
 run a pre-trained model in the web app without re-running the training/CV
-scripts.
+scripts. To enable the optional local U-Net engine, install:
+
+```bash
+pip install -r requirements-dl.txt
+```
+
+The U-Net checkpoint is produced by the Kaggle notebook and should be placed
+at `kaggle_outputs/follicle_unet/follicle_unet.pt`. It is intentionally
+gitignored because model weights and derived outputs are large.
 
 ### Getting the dataset
 
@@ -120,7 +127,9 @@ python app.py
 
 Upload a legacy `.vtk` volume; the app runs the full pipeline and displays
 a per-slice canvas view with color-coded follicle status alongside a
-measurements table.
+measurements table. Select either **Classical RF** or **2D U-Net** in the
+upload form. The U-Net option is enabled only when PyTorch and its checkpoint
+are available; the classical engine remains available without them.
 
 ## Running the tests
 
@@ -140,9 +149,9 @@ CI on every push and pull request (`.github/workflows/tests.yml`).
   the published baseline (see `REFERENCES.md`).
 - `vol110` and `vol3` show unusually low follicle-detection precision;
   not yet root-caused.
-- The web app does not yet expose a Random-Forest-vs-U-Net toggle, despite
-  this being the planned design once the follicle U-Net is trained
-  (`RESULTS_LOG.md`).
+- The U-Net is an experimental 2D slice model; its production performance
+  should be compared against the classical pipeline on held-out volumes
+  before clinical use.
 - Automated tests (`tests/`, run via `pytest`, see `TESTING.md`) cover the
   VTK I/O, follicle detection, and measurement/classification logic, plus
   the Flask app's routes — but not the RF/CV training code itself,
