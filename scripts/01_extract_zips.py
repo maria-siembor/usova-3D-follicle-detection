@@ -1,6 +1,3 @@
-"""Extract the USOVA3D zip files into data/. Run this first, from the
-project root, with the three zip files placed in data/ alongside it."""
-
 import zipfile
 import os
 
