@@ -1,0 +1,25 @@
+# Python environments and caches
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local analysis outputs and temporary API responses
+outputs/
+response.json
+response2.json
+
+# Local datasets, trained models, and generated feature caches
+data/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example

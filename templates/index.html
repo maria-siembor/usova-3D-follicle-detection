@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>USOVA 3D | Follicle workspace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="USOVA 3D home"><span>USOVA</span><b>3D</b></a>
+    <div class="status"><i></i> Local analysis workspace</div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">Ovarian imaging / analysis workspace</p>
+      <h1>See the follicle field<br><em>in three dimensions.</em></h1>
+      <p class="lede">Upload a legacy VTK volume to segment the ovary, detect follicles, and inspect their measured volume and equivalent diameter.</p>
+    </section>
+
+    <section class="upload-panel" aria-labelledby="upload-title">
+      <div>
+        <p class="eyebrow">01 / Volume</p>
+        <h2 id="upload-title">Start an analysis</h2>
+        <p class="muted">The current pipeline accepts a legacy binary <strong>.vtk</strong> volume.</p>
+      </div>
+      <form id="upload-form">
+        <label class="dropzone" id="dropzone" for="volume-file">
+          <span class="upload-mark">↑</span>
+          <span><strong id="file-label">Choose a VTK volume</strong><small>or drop it here</small></span>
+          <input id="volume-file" name="volume" type="file" accept=".vtk" required>
+        </label>
+        <button class="primary-button" type="submit"><span>Run detection</span><span>→</span></button>
+      </form>
+      <p class="error" id="error" role="alert"></p>
+    </section>
+
+    <section class="workspace hidden" id="workspace" aria-live="polite">
+      <div class="section-heading"><div><p class="eyebrow">02 / Findings</p><h2>Analysis overview</h2></div><span class="volume-meta" id="volume-meta"></span></div>
+      <div class="metrics">
+        <article class="metric metric-accent"><span>Total follicles</span><strong id="total-count">—</strong><small>detected candidates</small></article>
+        <article class="metric"><span>Optimal window</span><strong id="optimal-count">—</strong><small>16–22 mm diameter</small></article>
+        <article class="metric"><span>Mean volume</span><strong id="mean-volume">—</strong><small>mm³ across detections</small></article>
+        <article class="metric"><span>Largest follicle</span><strong id="largest-volume">—</strong><small>mm³ measured</small></article>
+      </div>
+
+      <div class="analysis-grid">
+        <section class="viewer-panel">
+          <div class="panel-heading"><div><p class="eyebrow">Volume navigator</p><h3>Axial view</h3></div><span class="slice-readout" id="slice-readout">Slice — / —</span></div>
+          <div class="viewer"><canvas id="slice-canvas" aria-label="Axial slice with detected follicles"></canvas><div class="viewer-empty" id="viewer-empty">Your analysed volume will appear here.</div></div>
+          <div class="slice-control"><input id="slice-slider" type="range" min="0" value="0"><output id="slice-output">—</output></div>
+          <div class="legend"><span><i class="dot optimal-dot"></i> Optimal</span><span><i class="dot immature-dot"></i> Immature</span><span><i class="dot post-mature-dot"></i> Post-mature</span><span><i class="dot selected-dot"></i> Selected</span></div>
+        </section>
+
+        <section class="table-panel">
+          <div class="panel-heading"><div><p class="eyebrow">Detected structures</p><h3>Measurements</h3></div><span class="table-count" id="table-count">—</span></div>
+          <div class="table-wrap"><table><thead><tr><th>ID</th><th>Diameter</th><th>Volume</th><th>Status</th></tr></thead><tbody id="measurements-body"></tbody></table></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
