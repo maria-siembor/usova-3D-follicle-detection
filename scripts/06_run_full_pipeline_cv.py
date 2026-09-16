@@ -1,9 +1,4 @@
-"""Honest end-to-end evaluation: predicted ovary (not ground truth) ->
-follicle detection -> match against ground truth follicles. This is
-the real answer to 'how well does the whole pipeline work together'.
-Expect a similar runtime to the original ovary CV (~25-30 min locally),
-since this retrains an ovary model per fold. Progress saves per fold,
-safe to interrupt/resume."""
+"""predicted ovary, follicle detection -> match against ground truth follicles."""
 
 import sys
 sys.path.append('src')
