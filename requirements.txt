@@ -1,0 +1,17 @@
+# Full stack for the pipeline, scripts, and Flask app.
+# Versions are unpinned minimums (not the exact versions used during
+# original development, which weren't recorded) — pin exact versions with
+# `pip freeze > requirements.lock.txt` once the environment is verified.
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.3
+scikit-image>=0.21
+joblib>=1.3
+pandas>=2.0
+Flask>=3.0
+
+# Only needed for scripts/09_export_slices_for_cnn.py output consumption
+# and reproducing follicle_segmentation_Unet.ipynb locally instead of on
+# Kaggle. Not required to run the RF pipeline or the web app.
+# torch>=2.0
+# opencv-python>=4.8
