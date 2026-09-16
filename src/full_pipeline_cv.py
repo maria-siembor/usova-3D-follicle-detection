@@ -1,11 +1,3 @@
-"""Honest end-to-end cross-validation: for each held-out volume, train
-the ovary model on the other 15, predict (not ground truth) the
-held-out volume's ovary, run follicle detection on that PREDICTED ROI,
-evaluate against ground-truth follicles. This is the real answer to
-'how well does the full pipeline work', as opposed to the two stages'
-independently-validated numbers (which each used ground truth for the
-other stage)."""
-
 import os
 import json
 import numpy as np
