@@ -6,10 +6,6 @@ import numpy as np
 from scipy import ndimage
 
 
-class DoubleConv:
-    """Placeholder type so importing this module does not require Torch."""
-
-
 _DEFAULT_CHECKPOINT = Path(__file__).resolve().parents[1] / "kaggle_outputs" / "follicle_unet" / "follicle_unet.pt"
 
 
