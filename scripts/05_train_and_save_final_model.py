@@ -1,6 +1,5 @@
 """Train the final ovary segmentation model on all 16 training volumes
-and save it to disk, so it doesn't need retraining every time the
-pipeline runs."""
+and save it to disk."""
 
 import sys
 import time
