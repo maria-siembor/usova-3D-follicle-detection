@@ -1,7 +1,3 @@
-"""Minimal reader/writer for the legacy VTK STRUCTURED_POINTS format used
-by USOVA3D. Legacy VTK BINARY data is big-endian by spec, regardless of
-platform, values written here account for that."""
-
 import numpy as np
 
 
