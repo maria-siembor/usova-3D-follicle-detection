@@ -2,7 +2,7 @@
 
 ## Dataset
 
-**USOVA3D** — a 3D ovarian ultrasound volume dataset built for an automated
+**USOVA3D** a 3D ovarian ultrasound volume dataset built for an automated
 ovary/follicle segmentation challenge. Each volume has independent
 annotations from two expert raters for both the ovary (`_o_r1`, `_o_r2`) and
 individual follicles (`_f_r1`, `_f_r2`).
@@ -21,7 +21,7 @@ individual follicles (`_f_r1`, `_f_r2`).
 through the official USOVA3D challenge channel and placed manually in
 `data/` before running `scripts/01_extract_zips.py`.
 
-> **Licensing / usage terms — action needed:** this repository does not
+> **Licensing / usage terms, action needed:** this repository does not
 > currently document the dataset's exact usage/redistribution terms (they
 > were supplied alongside the download, e.g. in
 > `Description_Data_Structures_For_Evaluation.pdf` or an accompanying
@@ -29,7 +29,7 @@ through the official USOVA3D challenge channel and placed manually in
 > actual terms here (attribution requirements, permitted uses, whether
 > results/derived data may be published) and confirm this project complies
 > with them. In the meantime, treat the dataset as **restricted / for
-> research use under the challenge's original terms only** — do not
+> research use under the challenge's original terms only** do not
 > redistribute the raw or annotated volumes.
 
 ## Published baseline
