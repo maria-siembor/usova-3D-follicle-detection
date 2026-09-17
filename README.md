@@ -164,5 +164,5 @@ CI on every push and pull request (`.github/workflows/tests.yml`).
 
 Code in this repository is licensed under the [MIT License](LICENSE). The
 USOVA3D dataset itself is a separate, third-party research dataset with its
-own usage terms — see [`REFERENCES.md`](REFERENCES.md) before
+own usage terms see [`REFERENCES.md`](REFERENCES.md) before
 redistributing any data, model weights trained on it, or derived outputs.
