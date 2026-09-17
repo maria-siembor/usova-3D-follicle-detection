@@ -86,7 +86,7 @@ gitignored because model weights and derived outputs are large.
 
 ### Getting the dataset
 
-The USOVA3D dataset is **not included in this repository** obtain it
+The USOVA3D dataset is **not included in this repository**. Obtain it
 through the official challenge channel (see `REFERENCES.md`), then:
 
 1. Place `Training_Set_2019.zip`, `Test_Set_2019.zip`, and
@@ -164,5 +164,5 @@ CI on every push and pull request (`.github/workflows/tests.yml`).
 
 Code in this repository is licensed under the [MIT License](LICENSE). The
 USOVA3D dataset itself is a separate, third-party research dataset with its
-own usage terms see [`REFERENCES.md`](REFERENCES.md) before
+own usage terms; see [`REFERENCES.md`](REFERENCES.md) before
 redistributing any data, model weights trained on it, or derived outputs.
