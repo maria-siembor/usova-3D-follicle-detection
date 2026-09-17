@@ -18,19 +18,44 @@ individual follicles (`_f_r1`, `_f_r2`).
   dataset, not included in this repository)
 
 **The dataset is not included in this repository.** It must be obtained
-through the official USOVA3D challenge channel and placed manually in
-`data/` before running `scripts/01_extract_zips.py`.
+through the official USOVA3D channel (contact: `usova3d@um.si`) and
+placed manually in `data/` before running `scripts/01_extract_zips.py`.
 
-> **Licensing / usage terms, action needed:** this repository does not
-> currently document the dataset's exact usage/redistribution terms (they
-> were supplied alongside the download, e.g. in
-> `Description_Data_Structures_For_Evaluation.pdf` or an accompanying
-> agreement). Before sharing this project publicly, add the dataset's
-> actual terms here (attribution requirements, permitted uses, whether
-> results/derived data may be published) and confirm this project complies
-> with them. In the meantime, treat the dataset as **restricted / for
-> research use under the challenge's original terms only** do not
-> redistribute the raw or annotated volumes.
+### Usage terms (USOVA3D Datasets: Release Agreement)
+
+The dataset is distributed under a signed Release Agreement with the
+Faculty of Electrical Engineering and Computer Science ("FERI") and
+University Medical Centre ("UKC") at the University of Maribor, Slovenia,
+who hold copyright on the data. Access is granted only for non-commercial
+research and teaching. Key terms:
+
+- **Redistribution (Clause 1):** without prior written approval from FERI,
+  the datasets "will not be further distributed, published, copied, or
+  disseminated in any way or form whatsoever, in whole or in part, whether
+  for profit or not." This is an absolute restriction; there is no research
+  or nonprofit exception beyond the access already granted to a signee.
+- **Modification and commercial use (Clause 2):** without prior written
+  approval from FERI and UKC, the datasets may not be modified or used
+  for commercial purposes.
+- **IP ownership (Clause 4):** all intellectual property rights in the
+  datasets remain with FERI/UKC; a signee has only the right to use the
+  data under the terms of the agreement, no ownership or further rights.
+- **Citation (Clause 5):** all resulting documents and papers must cite
+  the dataset per the instructions on the USOVA3D webpages at the time of
+  publication.
+- **Governing law / jurisdiction (Clauses 10-11):** Republic of Slovenia.
+
+**Practical consequence for this project:** the raw volumes, expert
+annotation files, and the official zips must never be committed to this
+(or any public) repository, attached to a public dataset host (e.g. a
+public Kaggle Dataset), or otherwise shared, in whole or in part. As of
+this writing, no dataset files have ever been committed to this
+repository's git history (verified directly). Trained model weights
+(`data/final_ovary_model.joblib`, `kaggle_outputs/follicle_unet/*.pt`)
+are also kept out of the repository via `.gitignore`, since they are
+derived directly from the restricted data. Aggregate results (metrics
+like Dice/F1, reported in `RESULTS_LOG.md`) are not the dataset itself
+and are not restricted by these terms.
 
 ## Published baseline
 
