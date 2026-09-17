@@ -61,7 +61,7 @@ RESULTS_LOG.md                   Experiment log (methods + validated results)
 REFERENCES.md                    Dataset, baseline paper, and clinical citations
 ```
 
-`data/` and `outputs/` are gitignored — they hold the dataset, cached
+`data/` and `outputs/` are gitignored; they hold the dataset, cached
 features, trained models, and generated results, and are not checked in.
 
 ## Setup
@@ -86,7 +86,7 @@ gitignored because model weights and derived outputs are large.
 
 ### Getting the dataset
 
-The USOVA3D dataset is **not included in this repository** — obtain it
+The USOVA3D dataset is **not included in this repository** obtain it
 through the official challenge channel (see `REFERENCES.md`), then:
 
 1. Place `Training_Set_2019.zip`, `Test_Set_2019.zip`, and
